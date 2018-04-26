@@ -51,6 +51,9 @@ $myShip = new Ship();
 $myShip->name = "Black Pearl";
 $myShip->weaponPower = 10;
 
+/**
+ * @param Ship $someShip
+ */
 function printShipSummary($someShip)
 {
     echo 'Ship name : '.$someShip->getName();
