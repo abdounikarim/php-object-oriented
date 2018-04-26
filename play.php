@@ -46,14 +46,22 @@ $myShip = new Ship();
 $myShip->name = "Black Pearl";
 $myShip->weaponPower = 10;
 
-echo 'Ship name : '.$myShip->getName();
-echo '<hr>';
-$myShip->sayHello();
-echo '<hr>';
+function printShipSummary($someShip)
+{
+    echo 'Ship name : '.$someShip->getName();
+    echo '<hr>';
+    $someShip->sayHello();
+    echo '<hr>';
+    echo 'Ship description : '.$someShip->getNameAndSpecs(false);
+    echo '<hr>';
+    echo 'Ship description : '.$someShip->getNameAndSpecs(true);
+}
+printShipSummary($myShip);
 
-var_dump($myShip->weaponPower);
+$otherShip = new Ship();
+$otherShip->name = 'Imperial Shuttle';
+$otherShip->weaponPower = 5;
+$otherShip->strength = 50;
 
 echo '<hr>';
-echo 'Ship description : '.$myShip->getNameAndSpecs(false);
-echo '<hr>';
-echo 'Ship description : '.$myShip->getNameAndSpecs(true);
+printShipSummary($otherShip);
