@@ -7,10 +7,10 @@ function get_ships()
     $ships = [];
 
     $ship1 = new Ship();
-    $ship1->name = 'Jedi Starfighter';
-    $ship1->weaponPower = 5;
-    $ship1->jediFactor = 15;
-    $ship1->strength = 30;
+    $ship1->setName('Jedi Starfighter');
+    $ship1->setWeaponPower(5);
+    $ship1->setJediFactor(15);
+    $ship1->setStrength(30);
     $ships['starfighter'] = $ship1;
     return $ships;
 }
