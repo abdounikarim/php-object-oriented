@@ -3,9 +3,9 @@ require __DIR__ . '/bootstrap.php';
 
 $container = new Container($configuration);
 $pdo = $container->getPDO();
-
-$shipLoader = new ShipLoader($pdo);
+$shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
+
 $errorMessage = '';
 if (isset($_GET['error'])) {
     switch ($_GET['error']) {
