@@ -6,6 +6,9 @@ $pdo = $container->getPDO();
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
 
+$brokenShip = new BrokenShip('i am so broken');
+$ships[] = $brokenShip;
+
 $errorMessage = '';
 if (isset($_GET['error'])) {
     switch ($_GET['error']) {
