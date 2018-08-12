@@ -1,5 +1,9 @@
 <?php
 
+namespace Service;
+
+use PDO;
+
 class Container
 {
     private $configuration;
@@ -23,7 +27,7 @@ class Container
     public function getPDO()
     {
         if($this->pdo === null){
-            $this->pdo = new PDO(
+            $this->pdo = new \PDO(
                 $this->configuration['db_dsn'],
                 $this->configuration['db_user'],
                 $this->configuration['db_pass']
