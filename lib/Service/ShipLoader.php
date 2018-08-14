@@ -5,6 +5,7 @@ namespace Service;
 use Model\RebelShip;
 use Model\Ship;
 use Model\AbstractShip;
+use Model\ShipCollection;
 
 class ShipLoader
 {
@@ -16,28 +17,24 @@ class ShipLoader
     }
 
     /**
-     * @return AbstractShip[]
+     * @return ShipCollection
      */
     public function getShips()
     {
-        try {
-            $shipsData = $this->shipStorage->fetchAllShipsData();
-        } catch (\PDOException $e) {
-            trigger_error('Database Exception '.$e->getMessage());
-            $shipsData = [];
-        }
-        $ships = [];
+        $ships = array();
+
+        $shipsData = $this->queryForShips();
 
         foreach ($shipsData as $shipData) {
             $ships[] = $this->createShipFromData($shipData);
         }
 
-        return $ships;
+        return new ShipCollection($ships);
     }
 
     /**
      * @param $id
-     * @return null|AbstractShip
+     * @return AbstractShip
      */
     public function findOneById($id)
     {
@@ -48,18 +45,29 @@ class ShipLoader
 
     private function createShipFromData(array $shipData)
     {
-        if($shipData['team'] == 'rebel')
-        {
+        if ($shipData['team'] == 'rebel') {
             $ship = new RebelShip($shipData['name']);
-        }
-        else{
+        } else {
             $ship = new Ship($shipData['name']);
             $ship->setJediFactor($shipData['jedi_factor']);
         }
+
         $ship->setId($shipData['id']);
         $ship->setWeaponPower($shipData['weapon_power']);
         $ship->setStrength($shipData['strength']);
 
         return $ship;
     }
+
+    private function queryForShips()
+    {
+        try {
+            return $this->shipStorage->fetchAllShipsData();
+        } catch (\PDOException $e) {
+            trigger_error('Database Exception! '.$e->getMessage());
+            // if all else fails, just return an empty array
+            return [];
+        }
+    }
 }
+

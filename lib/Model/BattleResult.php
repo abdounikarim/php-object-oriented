@@ -96,5 +96,4 @@ class BattleResult implements \ArrayAccess
         unset($this->$offset);
     }
 
-
 }
