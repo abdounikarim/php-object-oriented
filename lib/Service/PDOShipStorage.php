@@ -14,7 +14,7 @@ class PDOShipStorage implements ShipStorageInterface
 
     public function fetchAllShipsData()
     {
-        $statement = $this->pdo->query('SELECT * FROM FOOOOO');
+        $statement = $this->pdo->query('SELECT * FROM ship');
         $shipsArray = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         return $shipsArray;
